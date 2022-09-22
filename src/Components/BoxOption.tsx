@@ -1,8 +1,8 @@
-import { Box, Checkbox, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { toTitleCase } from "./utils/general";
+import { Box, Checkbox, Text } from "@chakra-ui/react";
+import { toTitleCase } from "../utils/general";
 
-const BoxOption = ({
+export const BoxOption = ({
   name,
   selected = false,
 }: {
@@ -31,18 +31,6 @@ const BoxOption = ({
       >
         <Text px={2}>{toTitleCase(name)}</Text>
       </Checkbox>
-    </Box>
-  );
-};
-
-export const IngredientsSelector = () => {
-  const ingredients = ["absynth", "vodka", "cherry brandy", "tequila"];
-
-  return (
-    <Box p={5} bg={"whiteAlpha.200"} w={"fit-content"}>
-      {ingredients.map((ingredient) => (
-        <BoxOption name={ingredient} />
-      ))}
     </Box>
   );
 };
