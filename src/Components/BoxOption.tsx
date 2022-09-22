@@ -12,7 +12,7 @@ export const BoxOption = ({
   const [isChecked, setIsChecked] = useState<boolean>(selected);
   return (
     <Box
-      m={2}
+      m={1}
       p={2}
       w={"15em"}
       border={"2px"}

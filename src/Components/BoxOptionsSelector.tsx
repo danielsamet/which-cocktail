@@ -1,4 +1,4 @@
-import { Box, BoxProps, Heading } from "@chakra-ui/react";
+import { Box, BoxProps, Button, Heading } from "@chakra-ui/react";
 import React from "react";
 import { BoxOption } from "./BoxOption";
 
@@ -12,15 +12,36 @@ export const BoxOptionsSelector = ({
   height?: BoxProps["height"];
 }) => {
   return (
-    <Box p={5} bg={"whiteAlpha.200"} w={"fit-content"} height={height}>
+    <Box
+      p={5}
+      bg={"whiteAlpha.200"}
+      w={"fit-content"}
+      height={height}
+      borderRadius={5}
+      display={"flex"}
+      flexDirection={"column"}
+    >
       <Heading size={"lg"} textAlign={"center"}>
         {title}
       </Heading>
 
-      <Box overflowY={"auto"} overflowX="hidden" height={"90%"} mt={5}>
+      <Box
+        overflowY={"auto"}
+        overflowX="hidden"
+        display={"flex"}
+        flexGrow={1}
+        flexDirection={"column"}
+        mt={5}
+      >
         {items.map((item) => (
           <BoxOption name={item} />
         ))}
+      </Box>
+
+      <Box display={"flex"} justifyContent={"center"} pt={5}>
+        <Button bg={"green.500"} color={"blackAlpha.900"}>
+          Build Menu!
+        </Button>
       </Box>
     </Box>
   );
