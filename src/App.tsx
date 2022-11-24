@@ -1,55 +1,27 @@
-import { Box, ChakraProvider, Heading, Text, theme } from "@chakra-ui/react";
-import { BoxOptionsSelector } from "./Components/BoxOptionsSelector";
-import { cocktails } from "./cocktails";
+import { Box, ChakraProvider, HStack, theme } from "@chakra-ui/react";
+import { TitleBlock } from "./TitleBlock";
+import { ListIngredients } from "./ListIngredients";
+import { ListCocktails } from "./ListCocktails";
+import { useState } from "react";
 
 export const App = () => {
-  const cocktailNames = cocktails.map((cocktail) => cocktail.name);
-  const ingredients = cocktails
-    .map((ingredient) => ingredient.ingredients)
-    .flat()
-    .filter((value, index, self) => self.indexOf(value) === index);
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
 
   return (
     <ChakraProvider theme={theme}>
-      <Box
-        height={"100vh"}
-        p={5}
-        display={"flex"}
-        justifyContent={"space-between"}
-      >
-        <BoxOptionsSelector
-          title={"Ingredients"}
-          items={ingredients}
-          height={"100%"}
-        />
+      <HStack height={"100vh"} p={5} gap={5}>
+        <Box h={"100%"} display={"flex"} gap={5}>
+          <ListIngredients
+            height={"100%"}
+            selectedIngredients={selectedIngredients}
+            setSelectedIngredients={setSelectedIngredients}
+          />
 
-        <Box height={"100%"} display={"flex"} alignItems={"center"}>
-          <Box
-            height={"20em"}
-            width={"40em"}
-            display={"flex"}
-            flexDirection={"column"}
-            justifyContent={"center"}
-            bg={"green.600"}
-            p={5}
-            borderRadius={5}
-          >
-            <Heading>which-cocktail?!</Heading>
-
-            <Text color={"blackAlpha.800"} fontWeight={"semibold"}>
-              Welcome to which-cocktail, a webapp to help you find out which
-              cocktails you can make with the ingredients you have. Then, you
-              can even print out a "customer" menu and a "mixer" menu too!
-            </Text>
-          </Box>
+          <ListCocktails height={"100%"} ingredients={selectedIngredients} />
         </Box>
 
-        <BoxOptionsSelector
-          title={"Cocktails"}
-          items={cocktailNames}
-          height={"100%"}
-        />
-      </Box>
+        <TitleBlock />
+      </HStack>
     </ChakraProvider>
   );
 };

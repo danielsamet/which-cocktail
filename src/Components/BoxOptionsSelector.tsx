@@ -21,7 +21,7 @@ export const BoxOptionsSelector = ({
       display={"flex"}
       flexDirection={"column"}
     >
-      <Heading size={"lg"} textAlign={"center"}>
+      <Heading size={"lg"} textAlign={"center"} mb={5}>
         {title}
       </Heading>
 
@@ -33,9 +33,9 @@ export const BoxOptionsSelector = ({
         flexDirection={"column"}
         mt={5}
       >
-        {items.map((item) => (
-          <BoxOption name={item} />
-        ))}
+        {/*{items.map((item) => (*/}
+        {/*  <BoxOption name={item} />*/}
+        {/*))}*/}
       </Box>
 
       <Box display={"flex"} justifyContent={"center"} pt={5}>

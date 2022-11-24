@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Checkbox, Text } from "@chakra-ui/react";
 import { toTitleCase } from "../utils/general";
 
 export const BoxOption = ({
   name,
   selected = false,
+  setSelectedIngredient,
 }: {
   name: string;
   selected?: boolean;
+  setSelectedIngredient: (ingredient: string) => void;
 }) => {
   const [isChecked, setIsChecked] = useState<boolean>(selected);
+
+  useEffect(() => {
+    setSelectedIngredient(name);
+    // eslint-disable-next-line
+  }, [isChecked]);
+
   return (
     <Box
       m={1}
