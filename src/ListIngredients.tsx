@@ -1,7 +1,7 @@
-import { Box, BoxProps, Heading } from "@chakra-ui/react";
+import { Box, BoxProps, Button, Heading } from "@chakra-ui/react";
 import React, { Dispatch, SetStateAction } from "react";
-import { cocktails } from "./cocktails";
-import { BoxOption } from "./Components/BoxOption";
+import { bases, cocktails, juices, mixers } from "./data";
+import { CheckboxGroup } from "./Components/CheckboxGroup";
 
 export const ListIngredients = ({
   height = "40em",
@@ -47,35 +47,18 @@ export const ListIngredients = ({
         flexDirection={"column"}
         mt={5}
       >
-        {ingredients.map((ingredient) => (
-          <BoxOption
-            name={ingredient}
-            selected={selectedIngredients.includes(ingredient)}
-            setSelectedIngredient={setSelectedIngredient}
-          />
-          // <Box
-          //   key={ingredient}
-          //   m={1}
-          //   p={2}
-          //   w={"15em"}
-          //   border={"2px"}
-          //   borderRadius={5}
-          //   bg={"whiteAlpha.200"}
-          //   borderColor={"blackAlpha.400"}
-          //   cursor={"pointer"}
-          //   onClick={() => setSelectedIngredient(ingredient)}
-          // >
-          //   <Checkbox
-          //     colorScheme={"green"}
-          //     isChecked={selectedIngredients.includes(ingredient)}
-          //     onChange={() => {
-          //       setSelectedIngredient(ingredient);
-          //     }}
-          //   >
-          //     <Text px={2}>{toTitleCase(ingredient)}</Text>
-          //   </Checkbox>
-          // </Box>
-        ))}
+        <CheckboxGroup title={"Bases"} items={bases} />
+        <CheckboxGroup title={"Mixers"} items={mixers} />
+        <CheckboxGroup title={"Juices"} items={juices} />
+      </Box>
+
+      <Box display={"flex"} justifyContent={"space-between"} mt={"auto"} pt={5}>
+        <Button disabled={ingredients && ingredients.length === 0}>
+          Select All
+        </Button>
+        <Button disabled={ingredients && ingredients.length === 0}>
+          Deselect All
+        </Button>
       </Box>
     </Box>
   );

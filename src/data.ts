@@ -1,3 +1,58 @@
+export const ingredientTypes: string[] = [
+  "bases",
+  "mixers",
+  "juices",
+  "liqueurs",
+  "other",
+];
+
+export const bases: string[] = [
+  "vodka",
+  "bourbon",
+  "whisky",
+  "gin",
+  "white rum",
+  "dark rum",
+  "silver tequila",
+  "gold tequila",
+  "wine",
+];
+
+export const mixers: string[] = [
+  "soda water",
+  "tonic water",
+  "cola",
+  "ginger ale",
+  "ginger beer",
+];
+
+export const juices: string[] = [
+  "cranberry",
+  "grapefruit",
+  "lemon",
+  "lime",
+  "orange",
+  "pineapple",
+  "apple",
+];
+
+export const liqueurs: string[] = [
+  "almond",
+  "cherry",
+  "chocolate",
+  "coffee",
+  "coconut",
+  "irish cream",
+  "herbal",
+  "mint",
+  "melon",
+  "orange",
+  "peach",
+  "raspberry",
+  "sloe berry",
+  "southern comfort",
+];
+
 export type Cocktail = {
   name: string;
   ingredients: string[];

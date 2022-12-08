@@ -1,7 +1,6 @@
 import { Box, BoxProps, Button, Heading } from "@chakra-ui/react";
-import { BoxOption } from "./Components/BoxOption";
 import React from "react";
-import { cocktails } from "./cocktails";
+// import { data } from "./data";
 
 export const ListCocktails = ({
   height = "40em",
@@ -10,7 +9,7 @@ export const ListCocktails = ({
   height?: BoxProps["height"];
   ingredients?: string[];
 }) => {
-  const cocktailNames = cocktails.map((cocktail) => cocktail.name);
+  // const cocktailNames = data.map((cocktail) => cocktail.name);
 
   return (
     <Box
