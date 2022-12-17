@@ -1,24 +1,22 @@
-export const ingredientTypes: string[] = [
-  "bases",
-  "mixers",
-  "juices",
-  "liqueurs",
-  "other",
-];
+export type Cocktail = {
+  name: string;
+  ingredients: string[];
+};
 
-export const bases: string[] = [
+const bases: string[] = [
   "vodka",
   "bourbon",
   "whisky",
   "gin",
   "white rum",
   "dark rum",
+  "spiced rum",
   "silver tequila",
   "gold tequila",
   "wine",
 ];
 
-export const mixers: string[] = [
+const mixers: string[] = [
   "soda water",
   "tonic water",
   "cola",
@@ -26,7 +24,7 @@ export const mixers: string[] = [
   "ginger beer",
 ];
 
-export const juices: string[] = [
+const juices: string[] = [
   "cranberry",
   "grapefruit",
   "lemon",
@@ -36,7 +34,7 @@ export const juices: string[] = [
   "apple",
 ];
 
-export const liqueurs: string[] = [
+const liqueurs: string[] = [
   "almond",
   "cherry",
   "chocolate",
@@ -53,9 +51,12 @@ export const liqueurs: string[] = [
   "southern comfort",
 ];
 
-export type Cocktail = {
-  name: string;
-  ingredients: string[];
+export const ingredients = {
+  bases: bases,
+  mixers: mixers,
+  juices: juices,
+  liqueurs: liqueurs,
+  other: [],
 };
 
 export const cocktails: Cocktail[] = [

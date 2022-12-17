@@ -1,36 +1,18 @@
-import { Box, BoxProps, Button, Heading } from "@chakra-ui/react";
-import React, { Dispatch, SetStateAction } from "react";
-import { bases, cocktails, juices, mixers } from "./data";
+import { Box, Button, Heading } from "@chakra-ui/react";
+import React, { useContext } from "react";
 import { CheckboxGroup } from "./Components/CheckboxGroup";
+import { IngredientsContext } from "./App";
 
-export const ListIngredients = ({
-  height = "40em",
-  selectedIngredients,
-  setSelectedIngredients,
-}: {
-  height?: BoxProps["height"];
-  selectedIngredients: string[];
-  setSelectedIngredients: Dispatch<SetStateAction<string[]>>;
-}) => {
-  const ingredients = cocktails
-    .map((ingredient) => ingredient.ingredients)
-    .flat()
-    .filter((value, index, self) => self.indexOf(value) === index);
-
-  const setSelectedIngredient = (ingredient: string) => {
-    if (selectedIngredients.includes(ingredient))
-      setSelectedIngredients(
-        selectedIngredients.filter((value) => value !== ingredient)
-      );
-    else setSelectedIngredients([ingredient, ...selectedIngredients]);
-  };
+export const ListIngredients = () => {
+  const { ingredients, setSelectedIngredients } =
+    useContext(IngredientsContext);
 
   return (
     <Box
       p={5}
       bg={"whiteAlpha.200"}
       w={"20em"}
-      height={height}
+      height={"100%"}
       borderRadius={5}
       display={"flex"}
       flexDirection={"column"}
@@ -47,18 +29,36 @@ export const ListIngredients = ({
         flexDirection={"column"}
         mt={5}
       >
-        <CheckboxGroup title={"Bases"} items={bases} />
-        <CheckboxGroup title={"Mixers"} items={mixers} />
-        <CheckboxGroup title={"Juices"} items={juices} />
+        <CheckboxGroup
+          title={"Bases"}
+          items={ingredients.bases}
+          setSelectedItems={setSelectedIngredients}
+        />
+        <CheckboxGroup
+          title={"Mixers"}
+          items={ingredients.mixers}
+          setSelectedItems={setSelectedIngredients}
+        />
+        <CheckboxGroup
+          title={"Juices"}
+          items={ingredients.juices}
+          setSelectedItems={setSelectedIngredients}
+        />
+        <CheckboxGroup
+          title={"Liqueurs"}
+          items={ingredients.liqueurs}
+          setSelectedItems={setSelectedIngredients}
+        />
+        <CheckboxGroup
+          title={"Other"}
+          items={ingredients.other}
+          setSelectedItems={setSelectedIngredients}
+        />
       </Box>
 
       <Box display={"flex"} justifyContent={"space-between"} mt={"auto"} pt={5}>
-        <Button disabled={ingredients && ingredients.length === 0}>
-          Select All
-        </Button>
-        <Button disabled={ingredients && ingredients.length === 0}>
-          Deselect All
-        </Button>
+        <Button>Select All</Button>
+        <Button>Deselect All</Button>
       </Box>
     </Box>
   );
