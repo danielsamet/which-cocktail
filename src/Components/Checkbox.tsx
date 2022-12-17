@@ -1,22 +1,29 @@
 import { Box, chakra, Flex, Text, useCheckbox } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { ChangeEvent } from "react";
 
 type CheckboxProps = {
   label: string;
+  selectedItems: string[];
   setSelectedItems: (selectedItems: (items: string[]) => string[]) => void;
 };
 
-export const Checkbox = ({ label, setSelectedItems }: CheckboxProps) => {
-  const { state, getCheckboxProps, getInputProps, getLabelProps, htmlProps } =
-    useCheckbox();
-
-  useEffect(() => {
+export const Checkbox = ({
+  label,
+  selectedItems,
+  setSelectedItems,
+}: CheckboxProps) => {
+  const makeChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSelectedItems((items: string[]) => {
-      if (state.isChecked) return [label, ...items];
+      if (event.target.checked) return [label, ...items];
       else return items.filter((value) => value !== label);
     });
-  }, [state.isChecked, label, setSelectedItems]);
-  // TODO: Investigate how to directly use the user event (rather than tracking it after the fact with useEffect)
+  };
+
+  const { state, getCheckboxProps, getInputProps, getLabelProps, htmlProps } =
+    useCheckbox({
+      onChange: makeChange,
+      isChecked: selectedItems.includes(label),
+    });
 
   return (
     <chakra.label

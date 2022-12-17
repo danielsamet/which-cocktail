@@ -4,8 +4,22 @@ import { CheckboxGroup } from "./Components/CheckboxGroup";
 import { IngredientsContext } from "./App";
 
 export const ListIngredients = () => {
-  const { ingredients, setSelectedIngredients } =
+  const { ingredients, selectedIngredients, setSelectedIngredients } =
     useContext(IngredientsContext);
+
+  const selectAll = () => {
+    setSelectedIngredients([
+      ...ingredients.bases,
+      ...ingredients.mixers,
+      ...ingredients.juices,
+      ...ingredients.liqueurs,
+      ...ingredients.other,
+    ]);
+  };
+
+  const deselectAll = () => {
+    setSelectedIngredients([]);
+  };
 
   return (
     <Box
@@ -32,33 +46,38 @@ export const ListIngredients = () => {
         <CheckboxGroup
           title={"Bases"}
           items={ingredients.bases}
+          selectedItems={selectedIngredients}
           setSelectedItems={setSelectedIngredients}
         />
         <CheckboxGroup
           title={"Mixers"}
           items={ingredients.mixers}
+          selectedItems={selectedIngredients}
           setSelectedItems={setSelectedIngredients}
         />
         <CheckboxGroup
           title={"Juices"}
           items={ingredients.juices}
+          selectedItems={selectedIngredients}
           setSelectedItems={setSelectedIngredients}
         />
         <CheckboxGroup
           title={"Liqueurs"}
           items={ingredients.liqueurs}
+          selectedItems={selectedIngredients}
           setSelectedItems={setSelectedIngredients}
         />
         <CheckboxGroup
           title={"Other"}
           items={ingredients.other}
+          selectedItems={selectedIngredients}
           setSelectedItems={setSelectedIngredients}
         />
       </Box>
 
       <Box display={"flex"} justifyContent={"space-between"} mt={"auto"} pt={5}>
-        <Button>Select All</Button>
-        <Button>Deselect All</Button>
+        <Button onClick={selectAll}>Select All</Button>
+        <Button onClick={deselectAll}>Deselect All</Button>
       </Box>
     </Box>
   );
