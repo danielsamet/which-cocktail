@@ -11,6 +11,7 @@ type IngredientValues = {
     mixers: string[];
     juices: string[];
     liqueurs: string[];
+    bitters: string[];
     other: string[];
   };
   selectedIngredients: string[];
@@ -23,6 +24,7 @@ const ingredientValues: IngredientValues = {
     mixers: ingredients.mixers,
     juices: ingredients.juices,
     liqueurs: ingredients.liqueurs,
+    bitters: ingredients.bitters,
     other: ingredients.other,
   },
   selectedIngredients: [],

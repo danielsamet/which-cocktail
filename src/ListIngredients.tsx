@@ -13,6 +13,7 @@ export const ListIngredients = () => {
       ...ingredients.mixers,
       ...ingredients.juices,
       ...ingredients.liqueurs,
+      ...ingredients.bitters,
       ...ingredients.other,
     ]);
   };
@@ -64,6 +65,12 @@ export const ListIngredients = () => {
         <CheckboxGroup
           title={"Liqueurs"}
           items={ingredients.liqueurs}
+          selectedItems={selectedIngredients}
+          setSelectedItems={setSelectedIngredients}
+        />
+        <CheckboxGroup
+          title={"Bitters"}
+          items={ingredients.bitters}
           selectedItems={selectedIngredients}
           setSelectedItems={setSelectedIngredients}
         />

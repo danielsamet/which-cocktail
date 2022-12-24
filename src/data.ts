@@ -7,13 +7,15 @@ const bases: string[] = [
   "vodka",
   "bourbon",
   "whisky",
-  "gin",
+  "dry gin",
   "white rum",
   "dark rum",
   "spiced rum",
   "silver tequila",
   "gold tequila",
   "wine",
+  "dry vermouth",
+  "sweet vermouth",
 ];
 
 const mixers: string[] = [
@@ -51,11 +53,18 @@ const liqueurs: string[] = [
   "southern comfort",
 ];
 
+const bitters: string[] = [
+  "aromatic bitters",
+  "orange bitters",
+  "cocoa bitters",
+];
+
 export const ingredients = {
   bases: bases,
   mixers: mixers,
   juices: juices,
   liqueurs: liqueurs,
+  bitters: bitters,
   other: [],
 };
 
