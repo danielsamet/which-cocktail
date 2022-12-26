@@ -40,7 +40,6 @@ export const ListCocktails = () => {
         >
           <CheckboxGroup<Cocktail>
             title={"Results"}
-            labels={availableCocktails.map((cocktail) => cocktail.name)}
             items={availableCocktails}
             selectedItems={selectedCocktails}
             setSelectedItems={setSelectedCocktails}

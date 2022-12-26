@@ -1,15 +1,17 @@
 import { Box, chakra, Flex, Text, useCheckbox } from "@chakra-ui/react";
 import { ChangeEvent } from "react";
 
-type CheckboxProps<Item> = {
-  label: string;
+export type CheckboxItem = {
+  name: string;
+};
+
+type CheckboxProps<Item extends CheckboxItem> = {
   item: Item;
   selectedItems: Item[];
   setSelectedItems: (selectedItems: (items: Item[]) => Item[]) => void;
 };
 
-export const Checkbox = <Item,>({
-  label,
+export const Checkbox = <Item extends CheckboxItem>({
   item,
   selectedItems,
   setSelectedItems,
@@ -60,7 +62,7 @@ export const Checkbox = <Item,>({
         textTransform={"capitalize"}
         {...getLabelProps()}
       >
-        {label}
+        {item.name}
       </Text>
     </chakra.label>
   );

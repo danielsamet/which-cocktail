@@ -46,7 +46,6 @@ export const ListIngredients = () => {
             <CheckboxGroup<Ingredient>
               key={type}
               title={`${type}s`}
-              labels={ingredientsByType.map((ingredient) => ingredient.name)}
               items={ingredientsByType}
               selectedItems={selectedIngredients}
               setSelectedItems={setSelectedIngredients}

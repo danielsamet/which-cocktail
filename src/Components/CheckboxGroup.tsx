@@ -1,18 +1,16 @@
 import { Box, Divider, Heading } from "@chakra-ui/react";
 import React, { Dispatch, SetStateAction } from "react";
-import { Checkbox } from "./Checkbox";
+import { Checkbox, CheckboxItem } from "./Checkbox";
 
-type CheckboxGroupProps<Item> = {
+type CheckboxGroupProps<Item extends CheckboxItem> = {
   title: string;
-  labels: string[];
   items: Item[];
   selectedItems: Item[];
   setSelectedItems: Dispatch<SetStateAction<Item[]>>;
 };
 
-export const CheckboxGroup = <Item,>({
+export const CheckboxGroup = <Item extends CheckboxItem>({
   title,
-  labels,
   items,
   selectedItems,
   setSelectedItems,
@@ -25,12 +23,10 @@ export const CheckboxGroup = <Item,>({
       <Divider borderWidth={"1px"} borderColor={"#ffffffeb"} mb={2} />
 
       {items.map((item, index) => {
-        const label = labels.at(index) || "Unknown";
         return (
           <Checkbox
-            label={label}
             item={item}
-            key={`${label}-${index}`} // TODO: err, this ain't foolproof :upside-down-face:
+            key={`${item.name}-${index}`} // TODO: err, this ain't foolproof :upside-down-face:
             selectedItems={selectedItems}
             setSelectedItems={setSelectedItems}
           />
