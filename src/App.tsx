@@ -9,7 +9,9 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Cocktail, cocktails, Ingredient, ingredients } from "./data";
+import { Cocktail, Ingredient } from "./data/types";
+import { ingredients } from "./data/ingredients";
+import { cocktails } from "./data/cocktails";
 
 type IngredientValues = {
   ingredients: Ingredient[];
@@ -54,9 +56,7 @@ export const App = () => {
   useEffect(() => {
     const areIngredientsAvailable = (cocktail: Cocktail) =>
       cocktail.ingredients.every((ingredient) =>
-        selectedIngredients
-          .map((selectedIngredient) => selectedIngredient.name)
-          .includes(ingredient)
+        selectedIngredients.includes(ingredient)
       );
 
     cocktailValues.cocktails.map((cocktail) => {

@@ -2,7 +2,7 @@ import { Box, Button, Heading } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { CheckboxGroup } from "./Components/CheckboxGroup";
 import { IngredientsContext } from "./App";
-import { Ingredient } from "./data";
+import { Ingredient } from "./data/types";
 
 export const ListIngredients = () => {
   const { ingredients, selectedIngredients, setSelectedIngredients } =

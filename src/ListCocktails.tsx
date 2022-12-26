@@ -2,7 +2,7 @@ import { Box, Button, Heading } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { CocktailsContext } from "./App";
 import { CheckboxGroup } from "./Components/CheckboxGroup";
-import { Cocktail } from "./data";
+import { Cocktail } from "./data/types";
 
 export const ListCocktails = () => {
   const { availableCocktails, selectedCocktails, setSelectedCocktails } =
