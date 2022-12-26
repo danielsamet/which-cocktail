@@ -2,20 +2,14 @@ import { Box, Button, Heading } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { CheckboxGroup } from "./Components/CheckboxGroup";
 import { IngredientsContext } from "./App";
+import { Ingredient } from "./data";
 
 export const ListIngredients = () => {
   const { ingredients, selectedIngredients, setSelectedIngredients } =
     useContext(IngredientsContext);
 
   const selectAll = () => {
-    setSelectedIngredients([
-      ...ingredients.bases,
-      ...ingredients.mixers,
-      ...ingredients.juices,
-      ...ingredients.liqueurs,
-      ...ingredients.bitters,
-      ...ingredients.other,
-    ]);
+    setSelectedIngredients(ingredients);
   };
 
   const deselectAll = () => {
@@ -44,42 +38,21 @@ export const ListIngredients = () => {
         flexDirection={"column"}
         mt={5}
       >
-        <CheckboxGroup
-          title={"Bases"}
-          items={ingredients.bases}
-          selectedItems={selectedIngredients}
-          setSelectedItems={setSelectedIngredients}
-        />
-        <CheckboxGroup
-          title={"Mixers"}
-          items={ingredients.mixers}
-          selectedItems={selectedIngredients}
-          setSelectedItems={setSelectedIngredients}
-        />
-        <CheckboxGroup
-          title={"Juices"}
-          items={ingredients.juices}
-          selectedItems={selectedIngredients}
-          setSelectedItems={setSelectedIngredients}
-        />
-        <CheckboxGroup
-          title={"Liqueurs"}
-          items={ingredients.liqueurs}
-          selectedItems={selectedIngredients}
-          setSelectedItems={setSelectedIngredients}
-        />
-        <CheckboxGroup
-          title={"Bitters"}
-          items={ingredients.bitters}
-          selectedItems={selectedIngredients}
-          setSelectedItems={setSelectedIngredients}
-        />
-        <CheckboxGroup
-          title={"Other"}
-          items={ingredients.other}
-          selectedItems={selectedIngredients}
-          setSelectedItems={setSelectedIngredients}
-        />
+        {[...new Set(ingredients.map((item) => item.type))].map((type) => {
+          const ingredientsByType = ingredients.filter(
+            (ingredient) => ingredient.type === type
+          );
+          return (
+            <CheckboxGroup<Ingredient>
+              key={type}
+              title={`${type}s`}
+              labels={ingredientsByType.map((ingredient) => ingredient.name)}
+              items={ingredientsByType}
+              selectedItems={selectedIngredients}
+              setSelectedItems={setSelectedIngredients}
+            />
+          );
+        })}
       </Box>
 
       <Box display={"flex"} justifyContent={"space-between"} mt={"auto"} pt={5}>

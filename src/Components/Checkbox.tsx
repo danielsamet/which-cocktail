@@ -1,28 +1,31 @@
 import { Box, chakra, Flex, Text, useCheckbox } from "@chakra-ui/react";
 import { ChangeEvent } from "react";
 
-type CheckboxProps = {
+type CheckboxProps<Item> = {
   label: string;
-  selectedItems: string[];
-  setSelectedItems: (selectedItems: (items: string[]) => string[]) => void;
+  item: Item;
+  selectedItems: Item[];
+  setSelectedItems: (selectedItems: (items: Item[]) => Item[]) => void;
 };
 
-export const Checkbox = ({
+export const Checkbox = <Item,>({
   label,
+  item,
   selectedItems,
   setSelectedItems,
-}: CheckboxProps) => {
+}: CheckboxProps<Item>) => {
   const makeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSelectedItems((items: string[]) => {
-      if (event.target.checked) return [label, ...items];
-      else return items.filter((value) => value !== label);
-    });
+    setSelectedItems((items: Item[]) =>
+      event.target.checked
+        ? [item, ...items]
+        : items.filter((value) => value !== item)
+    );
   };
 
   const { state, getCheckboxProps, getInputProps, getLabelProps, htmlProps } =
     useCheckbox({
       onChange: makeChange,
-      isChecked: selectedItems.includes(label),
+      isChecked: selectedItems.includes(item),
     });
 
   return (

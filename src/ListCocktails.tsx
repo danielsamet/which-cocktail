@@ -1,22 +1,27 @@
-import { Box, BoxProps, Button, Heading } from "@chakra-ui/react";
-import React from "react";
-// import { data } from "./data";
+import { Box, Button, Heading } from "@chakra-ui/react";
+import React, { useContext } from "react";
+import { CocktailsContext } from "./App";
+import { CheckboxGroup } from "./Components/CheckboxGroup";
+import { Cocktail } from "./data";
 
-export const ListCocktails = ({
-  height = "40em",
-  ingredients,
-}: {
-  height?: BoxProps["height"];
-  ingredients?: string[];
-}) => {
-  // const cocktailNames = data.map((cocktail) => cocktail.name);
+export const ListCocktails = () => {
+  const { availableCocktails, selectedCocktails, setSelectedCocktails } =
+    useContext(CocktailsContext);
+
+  const selectAll = () => {
+    setSelectedCocktails(availableCocktails);
+  };
+
+  const deselectAll = () => {
+    setSelectedCocktails([]);
+  };
 
   return (
     <Box
       p={5}
       bg={"whiteAlpha.200"}
       w={"20em"}
-      height={height}
+      height={"100%"}
       borderRadius={5}
       display={"flex"}
       flexDirection={"column"}
@@ -25,18 +30,21 @@ export const ListCocktails = ({
         Cocktails
       </Heading>
 
-      {ingredients && ingredients.length > 0 ? (
+      {availableCocktails && availableCocktails.length > 0 ? (
         <Box
           overflowY={"auto"}
           overflowX="hidden"
           display={"flex"}
           flexGrow={1}
           flexDirection={"column"}
-          mt={5}
         >
-          {/*{cocktailNames.map((item) => (*/}
-          {/*  <BoxOption name={item} key={item} />*/}
-          {/*))}*/}
+          <CheckboxGroup<Cocktail>
+            title={"Results"}
+            labels={availableCocktails.map((cocktail) => cocktail.name)}
+            items={availableCocktails}
+            selectedItems={selectedCocktails}
+            setSelectedItems={setSelectedCocktails}
+          />
         </Box>
       ) : (
         <Box bg={"blue.800"} p={5} fontSize={"lg"} textAlign={"center"}>
@@ -45,10 +53,16 @@ export const ListCocktails = ({
       )}
 
       <Box display={"flex"} justifyContent={"space-between"} mt={"auto"} pt={5}>
-        <Button disabled={ingredients && ingredients.length === 0}>
+        <Button
+          onClick={selectAll}
+          disabled={availableCocktails && availableCocktails.length === 0}
+        >
           Select All
         </Button>
-        <Button disabled={ingredients && ingredients.length === 0}>
+        <Button
+          onClick={deselectAll}
+          disabled={availableCocktails && availableCocktails.length === 0}
+        >
           Deselect All
         </Button>
       </Box>

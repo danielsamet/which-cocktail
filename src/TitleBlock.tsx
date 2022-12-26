@@ -33,7 +33,9 @@ export const TitleBlock = () => {
         <Button size={"lg"} disabled>
           Which-Cocktail
         </Button>
-        <Button size={"lg"}>Build Menu</Button>
+        <Button size={"lg"} disabled>
+          Build Menu
+        </Button>
       </HStack>
     </VStack>
   );

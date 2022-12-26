@@ -1,420 +1,507 @@
+enum Bases {
+  VODKA = "vodka",
+  BLACK_PEPPER_VODKA = "black pepper vodka",
+  BOURBON = "bourbon",
+  WHISKY = "whisky",
+  DRY_GIN = "dry gin",
+  WHITE_RUM = "white rum",
+  DARK_RUM = "dark rum",
+  AGED_RUM = "aged rum",
+  SPICED_RUM = "spiced rum",
+  SILVER_TEQUILA = "silver tequila",
+  GOLD_TEQUILA = "gold tequila",
+  BLACK_PEPPER_TEQUILA = "black pepper tequila",
+  DRY_WHITE_WINE = "dry white wine",
+  DRY_RED_WINE = "dry red wine",
+  SWEET_WHITE_WINE = "sweet white wine",
+  SWEET_RED_WINE = "sweet red wine",
+  DRY_SHERRY = "dry sherry",
+  SWEET_SHERRY = "sweet sherry",
+  PORT = "port",
+  CHAMPAGNE = "champagne",
+  DRY_VERMOUTH = "dry vermouth",
+  SWEET_VERMOUTH = "sweet vermouth",
+  SAKE = "sake",
+}
+
+enum Mixers {
+  SODA_WATER = "soda water",
+  TONIC_WATER = "tonic water",
+  COCONUT_WATER = "coconut water",
+  COLA = "cola",
+  GINGER_ALE = "ginger ale",
+  GINGER_BEER = "ginger beer",
+}
+
+enum Juices {
+  CRANBERRY = "cranberry",
+  GRAPEFRUIT = "grapefruit",
+  LEMON = "lemon",
+  LIME = "lime",
+  ORANGE = "orange",
+  PINEAPPLE = "pineapple",
+  APPLE = "apple",
+  CHERRY = "cherry",
+  POMEGRANATE = "pomegranate",
+  WATERMELON = "watermelon",
+  TOMATO = "tomato",
+  CLAMATO = "clamato",
+}
+
+enum Liqueurs {
+  ALMOND = "almond",
+  CHERRY = "cherry",
+  CHOCOLATE = "chocolate",
+  COFFEE = "coffee",
+  COCONUT = "coconut",
+  IRISH_CREAM = "irish cream",
+  HERBAL = "herbal",
+  MINT = "mint",
+  MELON = "melon",
+  ORANGE = "orange",
+  PEACH = "peach",
+  RASPBERRY = "raspberry",
+  SLOE_BERRY = "sloe berry",
+  SOUTHERN_COMFORT = "southern comfort",
+  BRANDY = "brandy",
+  ELDERFLOWER = "elderflower",
+  APPLE = "apple",
+  BANANA = "banana",
+  GRAND_MARNIER = "grand marnier",
+  CREME_DE_CACAO = "creme de cacao",
+  DARK_CREME_DE_CACAO = "dark creme de cacao",
+}
+
+enum Bitters {
+  AROMATIC = "aromatic bitters",
+  ORANGE = "orange bitters",
+  COCOA = "cocoa bitters",
+  CAMPARI = "campari",
+  APEROL = "aperol",
+}
+
+enum Fruits {
+  PEACH = "peach",
+  BANANA = "banana",
+  MANGO = "mango",
+  LIME_ZEST = "lime zest",
+  LEMON_ZEST = "lemon zest",
+}
+
+enum Others {
+  SUGAR = "sugar",
+  SUGAR_CUBE = "sugar cube",
+  BROWN_SUGAR = "brown sugar",
+  SIMPLE_SYRUP = "simple syrup",
+  CARDAMOM_SYRUP = "cardamom syrup",
+  GINGER_SYRUP = "ginger syrup",
+  HONEY = "honey",
+  GRENADINE = "grenadine",
+  MAPLE_SYRUP = "maple syrup",
+  COLD_ESPRESSO = "cold espresso",
+  CAPER_BERRY_BRINE = "caper berry brine",
+  COCONUT_CREAM = "coconut cream",
+  MINT = "mint",
+  SEA_SALT_FLAKES = "sea salt flakes",
+  CELERY_SALT = "celery salt",
+  CRUSHED_BLACK_PEPPER = "crushed black pepper",
+  CAYENNE_PEPPER = "cayenne pepper",
+  TABASCO = "tabasco",
+  WORCESTERSHIRE_SAUCE = "worcestershire sauce",
+  DILL = "dill",
+  DIJON_MUSTARD = "dijon mustard",
+  CREAMED_HORSERADISH = "creamed horseradish",
+  WASABI = "wasabi",
+}
+
+type IngredientNames =
+  | Bases
+  | Mixers
+  | Juices
+  | Liqueurs
+  | Bitters
+  | Fruits
+  | Others;
+
+type IngredientTypes =
+  | "base"
+  | "mixer"
+  | "juice"
+  | "liqueur"
+  | "bitter"
+  | "fruit"
+  | "other";
+
+export type Ingredient = {
+  name: IngredientNames;
+  type: IngredientTypes;
+  description?: string;
+  aliases?: string[];
+};
+
 export type Cocktail = {
   name: string;
-  ingredients: string[];
+  ingredients: IngredientNames[];
+  description?: string;
 };
 
-const bases: string[] = [
-  "vodka",
-  "bourbon",
-  "whisky",
-  "dry gin",
-  "white rum",
-  "dark rum",
-  "spiced rum",
-  "silver tequila",
-  "gold tequila",
-  "wine",
-  "dry vermouth",
-  "sweet vermouth",
+const ingredientTypes = [
+  [Bases, "base"],
+  [Mixers, "mixer"],
+  [Juices, "juice"],
+  [Liqueurs, "liqueur"],
+  [Bitters, "bitter"],
+  [Fruits, "fruit"],
+  [Others, "other"],
 ];
 
-const mixers: string[] = [
-  "soda water",
-  "tonic water",
-  "cola",
-  "ginger ale",
-  "ginger beer",
-];
-
-const juices: string[] = [
-  "cranberry",
-  "grapefruit",
-  "lemon",
-  "lime",
-  "orange",
-  "pineapple",
-  "apple",
-];
-
-const liqueurs: string[] = [
-  "almond",
-  "cherry",
-  "chocolate",
-  "coffee",
-  "coconut",
-  "irish cream",
-  "herbal",
-  "mint",
-  "melon",
-  "orange",
-  "peach",
-  "raspberry",
-  "sloe berry",
-  "southern comfort",
-];
-
-const bitters: string[] = [
-  "aromatic bitters",
-  "orange bitters",
-  "cocoa bitters",
-];
-
-export const ingredients = {
-  bases: bases,
-  mixers: mixers,
-  juices: juices,
-  liqueurs: liqueurs,
-  bitters: bitters,
-  other: [],
-};
+export const ingredients = ingredientTypes
+  .map(
+    (ingredientType) =>
+      Object.values(ingredientType[0]).map((item) => ({
+        name: item,
+        type: ingredientType[1],
+      })) as Ingredient[]
+  )
+  .flat();
 
 export const cocktails: Cocktail[] = [
   {
     name: "Martini",
-    ingredients: ["dry gin", "dry vermouth"],
+    ingredients: [Bases.DRY_GIN, Bases.DRY_VERMOUTH],
   },
   {
     name: "Old Fashioned",
-    ingredients: ["sugar cube", "angostura bitters", "soda water", "bourbon"],
+    ingredients: [
+      Others.SUGAR_CUBE,
+      Bitters.AROMATIC,
+      Mixers.SODA_WATER,
+      Bases.BOURBON,
+    ],
   },
   {
     name: "Cosmopolitan",
-    ingredients: ["vodka", "triple sec", "cranberry juice"],
+    ingredients: [Bases.VODKA, Liqueurs.ORANGE, Juices.CRANBERRY],
   },
   {
     name: "Long Island Iced Tea",
     ingredients: [
-      "vodka",
-      "gin",
-      "light rum",
-      "tequila",
-      "lemon juice",
-      "orange liqueur",
-      "sugar",
+      Bases.VODKA,
+      Bases.DRY_GIN,
+      Bases.WHITE_RUM,
+      Bases.SILVER_TEQUILA,
+      Juices.LEMON,
+      Liqueurs.ORANGE,
+      Others.SUGAR_CUBE,
     ],
   },
   {
     name: "Gin Rickey",
-    ingredients: ["gin", "lime juice", "simple syrup", "soda water"],
+    ingredients: [
+      Bases.DRY_GIN,
+      Juices.LIME,
+      Others.SIMPLE_SYRUP,
+      Mixers.SODA_WATER,
+    ],
   },
   {
     name: "Whiskey Sour",
     ingredients: [
-      "bourbon",
-      "cherry juice",
-      "angostura bitters",
-      "lemon juice",
-      "simple syrup",
+      Bases.BOURBON,
+      Juices.CHERRY,
+      Bitters.AROMATIC,
+      Juices.LEMON,
+      Others.SIMPLE_SYRUP,
     ],
   },
   {
     name: "Rob Roy",
     ingredients: [
-      "vodka",
-      "scotch whiskey",
-      "sweet vermouth",
-      "angostura bitters",
+      Bases.VODKA,
+      Bases.WHISKY,
+      Bases.SWEET_VERMOUTH,
+      Bitters.AROMATIC,
     ],
   },
   {
     name: "Americano",
-    ingredients: ["campari", "sweet vermouth", "soda water"],
+    ingredients: [Bitters.CAMPARI, Bases.SWEET_VERMOUTH, Mixers.SODA_WATER],
   },
   {
     name: "Singapore Sling",
     ingredients: [
-      "gin",
-      "cherry brandy",
-      "lemon juice",
-      "grenadine",
-      "soda water",
+      Bases.DRY_GIN,
+      Liqueurs.CHERRY,
+      Juices.LEMON,
+      Others.GRENADINE,
+      Mixers.SODA_WATER,
     ],
   },
-  { name: "Negroni", ingredients: ["dry gin", "sweet vermouth", "campari"] },
+  {
+    name: "Negroni",
+    ingredients: [Bases.DRY_GIN, Bases.SWEET_VERMOUTH, Bitters.CAMPARI],
+  },
   {
     name: "Manhattan",
-    ingredients: ["bourbon", "sweet vermouth", "angostura bitters"],
+    ingredients: [Bases.BOURBON, Bases.SWEET_VERMOUTH, Bitters.AROMATIC],
   },
-  { name: "Gimlet", ingredients: ["gin", "lime juice"] },
+  { name: "Gimlet", ingredients: [Bases.DRY_GIN, Juices.LIME] },
   {
     name: "Champagne Cocktail",
-    ingredients: ["sugar cube", "angostura bitters", "brandy", "champagne"],
-  },
-  { name: "Moscow Mule", ingredients: ["lime", "vodka", "ginger beer"] },
-  {
-    name: "Brooklyn Dropout",
     ingredients: [
-      "champagne",
-      "ginger beer",
-      "lemon juice",
-      "elderflower liqueur",
-      "angostura bitters",
-      "lime",
-      "peach",
+      Others.SUGAR_CUBE,
+      Bitters.AROMATIC,
+      Liqueurs.BRANDY,
+      Bases.CHAMPAGNE,
     ],
   },
   {
-    name: "Watermelon Rum Punch",
-    ingredients: [
-      "watermelon",
-      "white rum",
-      "tequila",
-      "mint syrup",
-      "lime juice",
-      "lemonade",
-    ],
-  },
-  {
-    name: "St Petersburger Punch",
-    ingredients: [
-      "russian vodka",
-      "lemon juice",
-      "creme de cassis",
-      "fresh raspberry puree",
-      "raspberry liqueur",
-      "simple syrup",
-    ],
-  },
-  {
-    name: "Almost Classic Sangria",
-    ingredients: ["red wine", "lemonade", "orange juice"],
-  },
-  {
-    name: "Honey Beer Punch",
-    ingredients: ["honey", "lemon juice", "gin", "beer"],
-  },
-  {
-    name: "Beer Team",
-    ingredients: ["beer", "ginger beer", "english breakfast tea"],
-  },
-  {
-    name: "Planter's Punch",
-    ingredients: [
-      "dark rum",
-      "lime juice",
-      "angostura bitters",
-      "simple syrup",
-      "soda water",
-    ],
-  },
-  {
-    name: "Poor Man's Champagne Punch",
-    ingredients: [
-      "frozen raspberries",
-      "lime juice",
-      "simple syrup",
-      "vodka",
-      "beer",
-    ],
+    name: "Moscow Mule",
+    ingredients: [Juices.LIME, Bases.VODKA, Mixers.GINGER_BEER],
   },
   {
     name: "Rosita",
     ingredients: [
-      "tequila",
-      "sweet vermouth",
-      "dry vermouth",
-      "aperol",
-      "angostura bitters",
+      Bases.SILVER_TEQUILA,
+      Bases.SWEET_VERMOUTH,
+      Bases.DRY_VERMOUTH,
+      Bitters.APEROL,
+      Bitters.AROMATIC,
     ],
   },
   {
     name: "Apple Catcher",
-    ingredients: ["apple brandy", "orange juice", "lemon juice", "maple syrup"],
+    ingredients: [
+      Liqueurs.APPLE,
+      Juices.ORANGE,
+      Juices.LEMON,
+      Others.MAPLE_SYRUP,
+    ],
   },
   {
     name: "Spartacus",
     ingredients: [
-      "scotch whiskey",
-      "orange juice",
-      "sweet vermouth",
-      "cherry heering",
+      Bases.WHISKY,
+      Juices.ORANGE,
+      Bases.SWEET_VERMOUTH,
+      Liqueurs.CHERRY,
     ],
   },
-  { name: "Take Ivy", ingredients: ["gin", "orange bitters", "port"] },
+  {
+    name: "Take Ivy",
+    ingredients: [Bases.DRY_GIN, Bitters.ORANGE, Bases.PORT],
+  },
   {
     name: "Espresso Martini",
     ingredients: [
-      "vodka",
-      "cold espresso",
-      "coffee liqueur",
-      "brown sugar syrup",
+      Bases.VODKA,
+      Others.COLD_ESPRESSO,
+      Liqueurs.COFFEE,
+      Others.BROWN_SUGAR,
     ],
   },
   {
     name: "Holy Water",
     ingredients: [
-      "vodka",
-      "triple sec",
-      "white rum",
-      "tonic water",
-      "grenadine",
+      Bases.VODKA,
+      Liqueurs.ORANGE,
+      Bases.WHITE_RUM,
+      Mixers.TONIC_WATER,
+      Others.GRENADINE,
     ],
   },
   {
     name: "Maxim",
-    ingredients: ["gin", "dry vermouth", "dark creme de cacao"],
+    ingredients: [
+      Bases.DRY_GIN,
+      Bases.DRY_VERMOUTH,
+      Liqueurs.DARK_CREME_DE_CACAO,
+    ],
   },
   {
     name: "The Slammer",
-    ingredients: ["tequila gold", "champagne", "creme de cacao"],
+    ingredients: [Bases.GOLD_TEQUILA, Bases.CHAMPAGNE, Liqueurs.CREME_DE_CACAO],
   },
   {
     name: "Sour Fizz",
     ingredients: [
-      "tequila gold",
-      "lime juice",
-      "runny honey",
-      "orange bitters",
-      "lemon",
+      Bases.GOLD_TEQUILA,
+      Juices.LIME,
+      Others.HONEY,
+      Bitters.ORANGE,
     ],
   },
   {
     name: "Dirty Dick",
     ingredients: [
-      "tequila gold",
-      "black pepper vodka",
-      "lime juice",
-      "caper berry brine",
+      Bases.GOLD_TEQUILA,
+      Bases.BLACK_PEPPER_VODKA,
+      Juices.LIME,
+      Others.CAPER_BERRY_BRINE,
     ],
   },
   {
     name: "Class Act",
     ingredients: [
-      "sugar cube",
-      "angostura bitters",
-      "grand marnier",
-      "champagne",
+      Others.SUGAR_CUBE,
+      Bitters.AROMATIC,
+      Liqueurs.GRAND_MARNIER,
+      Bases.CHAMPAGNE,
     ],
   },
-  { name: "Rudolph", ingredients: ["gin", "elderflower liqueur", "champagne"] },
+  {
+    name: "Rudolph",
+    ingredients: [Bases.DRY_GIN, Liqueurs.ELDERFLOWER, Bases.CHAMPAGNE],
+  },
   {
     name: "Pina Colada",
-    ingredients: ["white rum", "dark rum", "pineapple juice", "coconut cream"],
+    ingredients: [
+      Bases.WHITE_RUM,
+      Bases.DARK_RUM,
+      Juices.PINEAPPLE,
+      Others.COCONUT_CREAM,
+    ],
   },
   {
     name: "Mojito",
-    ingredients: ["lime juice", "sugar", "mint", "light rum", "soda water"],
+    ingredients: [
+      Juices.LIME,
+      Others.SUGAR,
+      Others.MINT,
+      Bases.WHITE_RUM,
+      Mixers.SODA_WATER,
+    ],
   },
   {
     name: "Peach & Black Pepper Margarita",
     ingredients: [
-      "black pepper",
-      "lime juice",
-      "ripe peach",
-      "black pepper infused tequila",
-      "peach schnapps",
+      Others.SEA_SALT_FLAKES,
+      Others.CRUSHED_BLACK_PEPPER,
+      Juices.LIME,
+      Fruits.PEACH,
+      Bases.BLACK_PEPPER_TEQUILA,
+      Liqueurs.PEACH,
     ],
   },
   {
     name: "Tequila Pomegranate",
-    ingredients: ["tequila", "cointreau", "lime juice", "pomegranate juice"],
+    ingredients: [
+      Bases.SILVER_TEQUILA,
+      Liqueurs.ORANGE,
+      Juices.LIME,
+      Juices.POMEGRANATE,
+    ],
   },
   {
     name: "Banana Daiquiri",
     ingredients: [
-      "dark rum",
-      "banana liqueur",
-      "lime juice",
-      "simple syrup",
-      "banana",
+      Bases.DARK_RUM,
+      Liqueurs.BANANA,
+      Juices.LIME,
+      Others.SIMPLE_SYRUP,
+      Fruits.BANANA,
     ],
   },
-  { name: "Beach House", ingredients: ["gin", "lime juice", "coconut water"] },
+  {
+    name: "Beach House",
+    ingredients: [Bases.DRY_GIN, Juices.LIME, Mixers.COCONUT_WATER],
+  },
   {
     name: "Big Cardomomma's House",
     ingredients: [
-      "mango",
-      "peach schnapps",
-      "lime juice",
-      "cardamom syrup",
-      "champagne",
+      Fruits.MANGO,
+      Liqueurs.PEACH,
+      Juices.LIME,
+      Others.CARDAMOM_SYRUP,
+      Bases.CHAMPAGNE,
     ],
   },
   {
     name: "Pineapple Mountain",
     ingredients: [
-      "aged rum",
-      "pineapple juice",
-      "lemon juice",
-      "ginger syrup",
-      "angostura bitters",
+      Bases.AGED_RUM,
+      Juices.PINEAPPLE,
+      Juices.LEMON,
+      Others.GINGER_SYRUP,
+      Bitters.AROMATIC,
     ],
   },
   {
     name: "Frozen Ginger Margarita",
     ingredients: [
-      "tequila",
-      "cointreau",
-      "ginger syrup",
-      "lime",
-      "lemon juice",
-      "orange juice",
-      "champagne",
+      Bases.SILVER_TEQUILA,
+      Liqueurs.ORANGE,
+      Others.GINGER_SYRUP,
+      Juices.LIME,
+      Fruits.LIME_ZEST,
+      Juices.LEMON,
+      Juices.ORANGE,
+      Bases.CHAMPAGNE,
     ],
   },
   {
     name: "Watermelon Bloody Mary",
     ingredients: [
-      "vodka",
-      "dry white wine",
-      "watermelon juice",
-      "lemon juice",
-      "mint leaves",
-      "ground pepper",
-      "angostura bitters",
+      Bases.VODKA,
+      Bases.DRY_WHITE_WINE,
+      Juices.WATERMELON,
+      Juices.LEMON,
+      Others.MINT,
+      Others.CRUSHED_BLACK_PEPPER,
+      Bitters.AROMATIC,
     ],
   },
   {
     name: "Bloody Mary",
     ingredients: [
-      "vodka",
-      "dry white wine",
-      "tabasco",
-      "worcestershire sauce",
-      "tomato juice",
-      "lemon juice",
-      "celery salt",
-      "cayenne pepper",
+      Bases.VODKA,
+      Bases.DRY_WHITE_WINE,
+      Others.TABASCO,
+      Others.WORCESTERSHIRE_SAUCE,
+      Juices.TOMATO,
+      Juices.LEMON,
+      Others.CELERY_SALT,
+      Others.CAYENNE_PEPPER,
     ],
   },
   {
     name: "Fire in the Blood",
     ingredients: [
-      "dill",
-      "dijon mustard",
-      "tabasco",
-      "worcestershire sauce",
-      "black pepper infused vodka",
-      "tomato juice",
-      "lemon juice",
-      "celery salt",
-      "ground pepper",
+      Others.DILL,
+      Others.DIJON_MUSTARD,
+      Others.TABASCO,
+      Others.WORCESTERSHIRE_SAUCE,
+      Bases.BLACK_PEPPER_VODKA,
+      Juices.TOMATO,
+      Juices.LEMON,
+      Others.CELERY_SALT,
+      Others.CRUSHED_BLACK_PEPPER,
     ],
   },
   {
     name: "Sangrita",
     ingredients: [
-      "tequila",
-      "dry sherry",
-      "creamed horseradish",
-      "worcestershire sauce",
-      "clamato juice",
-      "lemon juice",
-      "celery salt",
-      "cayenne pepper",
+      Bases.SILVER_TEQUILA,
+      Bases.DRY_SHERRY,
+      Others.CREAMED_HORSERADISH,
+      Others.WORCESTERSHIRE_SAUCE,
+      Juices.CLAMATO,
+      Juices.LEMON,
+      Others.CELERY_SALT,
+      Others.CAYENNE_PEPPER,
     ],
   },
   {
     name: "Wasabian",
     ingredients: [
-      "wasabi",
-      "celery salt",
-      "lime juice",
-      "lemon juice",
-      "vodka",
-      "sake",
-      "tomato juice",
-      "angostura bitters",
+      Others.WASABI,
+      Others.CELERY_SALT,
+      Juices.LIME,
+      Juices.LEMON,
+      Bases.VODKA,
+      Bases.SAKE,
+      Juices.TOMATO,
+      Bitters.AROMATIC,
     ],
   },
 ];
