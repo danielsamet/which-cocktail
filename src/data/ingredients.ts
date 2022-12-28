@@ -5,7 +5,12 @@ type IngredientMap<IType extends IngredientTypeLiterals> = {
 };
 
 export const Bases: IngredientMap<"base"> = {
-  VODKA: { name: "vodka", type: "base" },
+  VODKA: {
+    name: "vodka",
+    type: "base",
+    description:
+      "Vodka is composed mainly of water and ethanol but sometimes with traces of impurities and flavourings. Traditionally, it is made by distilling liquid from fermented cereal grains, and potatoes since introduced in Europe in the 1700's. Some modern brands use fruits, honey, or maple sap as the base.",
+  },
   BLACK_PEPPER_VODKA: { name: "black pepper vodka", type: "base" },
   BOURBON: { name: "bourbon", type: "base" },
   WHISKY: { name: "whisky", type: "base" },

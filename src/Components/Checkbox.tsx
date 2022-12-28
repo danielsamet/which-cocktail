@@ -1,17 +1,19 @@
-import { Box, chakra, Flex, Text, useCheckbox } from "@chakra-ui/react";
+import { Box, Button, chakra, Flex, Text, useCheckbox } from "@chakra-ui/react";
 import { ChangeEvent } from "react";
 
-export type CheckboxItem = {
+export type CheckboxItem<Item> = {
   name: string;
+  callback?: (item: Item) => void;
+  callbackButtonIcon?: string;
 };
 
-type CheckboxProps<Item extends CheckboxItem> = {
+type CheckboxProps<Item extends CheckboxItem<Item>> = {
   item: Item;
   selectedItems: Item[];
   setSelectedItems: (selectedItems: (items: Item[]) => Item[]) => void;
 };
 
-export const Checkbox = <Item extends CheckboxItem>({
+export const Checkbox = <Item extends CheckboxItem<Item>>({
   item,
   selectedItems,
   setSelectedItems,
@@ -37,8 +39,9 @@ export const Checkbox = <Item extends CheckboxItem>({
       alignItems="center"
       gridColumnGap={2}
       my={1}
-      bg="gray.100"
-      borderColor="green.500"
+      bg="transparent"
+      _hover={{ background: "blackAlpha.400" }}
+      borderRadius={2}
       px={3}
       py={1}
       cursor="pointer"
@@ -49,7 +52,7 @@ export const Checkbox = <Item extends CheckboxItem>({
         alignItems="center"
         justifyContent="center"
         border="2px solid"
-        borderColor="green.500"
+        borderColor="green.600"
         w={4}
         h={4}
         {...getCheckboxProps()}
@@ -57,13 +60,22 @@ export const Checkbox = <Item extends CheckboxItem>({
         {state.isChecked && <Box w={2} h={2} bg="green.500" />}
       </Flex>
       <Text
-        color="gray.800"
+        color="gray.100"
         fontWeight={"semibold"}
         textTransform={"capitalize"}
         {...getLabelProps()}
       >
         {item.name}
       </Text>
+      {item.callback && (
+        <Button
+          size={"xs"}
+          marginStart={"auto"}
+          onClick={() => item.callback && item.callback(item)}
+        >
+          {item.callbackButtonIcon || "?"}
+        </Button>
+      )}
     </chakra.label>
   );
 };

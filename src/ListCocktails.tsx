@@ -20,7 +20,7 @@ export const ListCocktails = () => {
     <Box
       p={5}
       bg={"whiteAlpha.200"}
-      w={"20em"}
+      w={"25em"}
       height={"100%"}
       borderRadius={5}
       display={"flex"}

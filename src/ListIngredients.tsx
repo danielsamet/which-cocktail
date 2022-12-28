@@ -2,7 +2,7 @@ import { Box, Button, Heading } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { CheckboxGroup } from "./Components/CheckboxGroup";
 import { IngredientsContext } from "./App";
-import { Ingredient } from "./data/types";
+import { Ingredient, ingredientTypes } from "./data/types";
 
 export const ListIngredients = () => {
   const { ingredients, selectedIngredients, setSelectedIngredients } =
@@ -20,7 +20,7 @@ export const ListIngredients = () => {
     <Box
       p={5}
       bg={"whiteAlpha.200"}
-      w={"20em"}
+      w={"25em"}
       height={"100%"}
       borderRadius={5}
       display={"flex"}
@@ -38,7 +38,7 @@ export const ListIngredients = () => {
         flexDirection={"column"}
         mt={5}
       >
-        {[...new Set(ingredients.map((item) => item.type))].map((type) => {
+        {ingredientTypes.map((type) => {
           const ingredientsByType = ingredients.filter(
             (ingredient) => ingredient.type === type
           );

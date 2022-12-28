@@ -2,14 +2,14 @@ import { Box, Divider, Heading } from "@chakra-ui/react";
 import React, { Dispatch, SetStateAction } from "react";
 import { Checkbox, CheckboxItem } from "./Checkbox";
 
-type CheckboxGroupProps<Item extends CheckboxItem> = {
+type CheckboxGroupProps<Item extends CheckboxItem<Item>> = {
   title: string;
   items: Item[];
   selectedItems: Item[];
   setSelectedItems: Dispatch<SetStateAction<Item[]>>;
 };
 
-export const CheckboxGroup = <Item extends CheckboxItem>({
+export const CheckboxGroup = <Item extends CheckboxItem<Item>>({
   title,
   items,
   selectedItems,
