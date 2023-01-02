@@ -1,9 +1,11 @@
 import { Box, Divider, Heading, Text } from "@chakra-ui/react";
 import { useMatch } from "react-router-dom";
-import { ingredients } from "../data/ingredients";
+import { useContext } from "react";
+import { IngredientsContext } from "../App";
 
 export const IngredientPage = () => {
   const match = useMatch("ingredients/:type/:name");
+  const { ingredients } = useContext(IngredientsContext);
 
   if (!match) return <Box>Error</Box>;
 

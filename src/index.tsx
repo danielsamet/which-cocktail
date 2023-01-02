@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         element: <IngredientPage />,
       },
       {
-        path: "cocktails/:name",
+        path: "source_one/:name",
         element: <IngredientPage />,
       },
     ],

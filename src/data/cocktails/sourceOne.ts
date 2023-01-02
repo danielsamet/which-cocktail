@@ -6,10 +6,10 @@ import {
   Liqueurs,
   Mixers,
   Others,
-} from "./ingredients";
-import { Cocktail } from "./types";
+} from "../ingredients/ingredients";
+import { Cocktail } from "../types";
 
-export const cocktails: Cocktail[] = [
+export const sourceOne: Cocktail[] = [
   {
     name: "Martini",
     ingredients: [Bases.DRY_GIN, Bases.DRY_VERMOUTH],
@@ -348,7 +348,4 @@ export const cocktails: Cocktail[] = [
       Bitters.AROMATIC,
     ],
   },
-].map((cocktail) => ({
-  ...cocktail,
-  urlSafeName: cocktail.name.replaceAll(" ", "-"),
-}));
+];

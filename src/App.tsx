@@ -10,8 +10,8 @@ import {
   useState,
 } from "react";
 import { Cocktail, Ingredient } from "./data/types";
-import { ingredients } from "./data/ingredients";
-import { cocktails } from "./data/cocktails";
+import { ingredients } from "./data/ingredients/all";
+import { cocktails } from "./data/cocktails/all";
 import { Page } from "./Pages/Page";
 import { useNavigate } from "react-router-dom";
 

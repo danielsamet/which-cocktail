@@ -1,4 +1,4 @@
-import { Ingredient, IngredientTypeLiterals } from "./types";
+import { Ingredient, IngredientTypeLiterals } from "../types";
 
 type IngredientMap<IType extends IngredientTypeLiterals> = {
   [identifier: string]: Ingredient<IType>;
@@ -124,16 +124,3 @@ export const Others: IngredientMap<"other"> = {
   CREAMED_HORSERADISH: { name: "creamed horseradish", type: "other" },
   WASABI: { name: "wasabi", type: "other" },
 } as const;
-
-export const ingredients: Ingredient[] = [
-  ...Object.values(Bases),
-  ...Object.values(Mixers),
-  ...Object.values(Juices),
-  ...Object.values(Liqueurs),
-  ...Object.values(Bitters),
-  ...Object.values(Fruits),
-  ...Object.values(Others),
-].map((ingredient) => ({
-  ...ingredient,
-  urlSafeName: ingredient.name.replaceAll(" ", "-"),
-}));
