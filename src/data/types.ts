@@ -18,10 +18,12 @@ export type Ingredient<
   description?: string;
   aliases?: string[];
   callback?: (ingredient: Ingredient) => void;
+  urlSafeName?: string;
 };
 
 export type Cocktail = {
   name: string;
   ingredients: Ingredient[];
   description?: string;
+  urlSafeName?: string;
 };

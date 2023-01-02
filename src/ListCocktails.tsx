@@ -8,6 +8,8 @@ export const ListCocktails = () => {
   const { availableCocktails, selectedCocktails, setSelectedCocktails } =
     useContext(CocktailsContext);
 
+  console.log(availableCocktails);
+
   const selectAll = () => {
     setSelectedCocktails(availableCocktails);
   };

@@ -1,7 +1,7 @@
 import { Box, ChakraProvider, HStack, theme } from "@chakra-ui/react";
-import { TitleBlock } from "./TitleBlock";
 import { ListIngredients } from "./ListIngredients";
 import { ListCocktails } from "./ListCocktails";
+import * as React from "react";
 import {
   createContext,
   Dispatch,
@@ -12,6 +12,8 @@ import {
 import { Cocktail, Ingredient } from "./data/types";
 import { ingredients } from "./data/ingredients";
 import { cocktails } from "./data/cocktails";
+import { Page } from "./Pages/Page";
+import { useNavigate } from "react-router-dom";
 
 type IngredientValues = {
   ingredients: Ingredient[];
@@ -46,6 +48,11 @@ export const IngredientsContext =
 
 export const CocktailsContext = createContext<CocktailValues>(cocktailValues);
 
+export const INGREDIENT_PROPERTIES_TO_COMPARE = [
+  "type",
+  "name",
+] as (keyof Ingredient)[];
+
 export const App = () => {
   const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>(
     []
@@ -53,10 +60,16 @@ export const App = () => {
   const [availableCocktails, setAvailableCocktails] = useState<Cocktail[]>([]);
   const [selectedCocktails, setSelectedCocktails] = useState<Cocktail[]>([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const areIngredientsAvailable = (cocktail: Cocktail) =>
       cocktail.ingredients.every((ingredient) =>
-        selectedIngredients.includes(ingredient)
+        selectedIngredients.some((selectedIngredient) =>
+          INGREDIENT_PROPERTIES_TO_COMPARE.every(
+            (property) => selectedIngredient[property] === ingredient[property]
+          )
+        )
       );
 
     cocktailValues.cocktails.map((cocktail) => {
@@ -74,14 +87,26 @@ export const App = () => {
     <ChakraProvider theme={theme}>
       <IngredientsContext.Provider
         value={{
-          ...ingredientValues,
+          ingredients: ingredients.map((ingredient) => ({
+            ...ingredient,
+            callback: () =>
+              navigate(
+                `/ingredients/${ingredient.type}/${
+                  ingredient.urlSafeName || ingredient.name
+                }`
+              ),
+          })),
           selectedIngredients: selectedIngredients,
           setSelectedIngredients: setSelectedIngredients,
         }}
       >
         <CocktailsContext.Provider
           value={{
-            ...cocktailValues,
+            cocktails: cocktails.map((cocktail) => ({
+              ...cocktail,
+              callback: () =>
+                navigate(`/cocktails/${cocktail.urlSafeName || cocktail.name}`),
+            })),
             availableCocktails: availableCocktails,
             setAvailableCocktails: setAvailableCocktails,
             selectedCocktails: selectedCocktails,
@@ -94,7 +119,7 @@ export const App = () => {
               <ListCocktails />
             </Box>
 
-            <TitleBlock />
+            <Page />
           </HStack>
         </CocktailsContext.Provider>
       </IngredientsContext.Provider>

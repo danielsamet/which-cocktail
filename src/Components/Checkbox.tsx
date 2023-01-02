@@ -11,25 +11,37 @@ type CheckboxProps<Item extends CheckboxItem<Item>> = {
   item: Item;
   selectedItems: Item[];
   setSelectedItems: (selectedItems: (items: Item[]) => Item[]) => void;
+  checkWithProperties?: (keyof Item)[];
 };
 
 export const Checkbox = <Item extends CheckboxItem<Item>>({
   item,
   selectedItems,
   setSelectedItems,
+  checkWithProperties,
 }: CheckboxProps<Item>) => {
+  const isItemSelected = (items: Item[]): boolean => {
+    if (checkWithProperties === undefined) return items.includes(item);
+
+    return items.some((selectedItem) =>
+      checkWithProperties.every(
+        (property) => selectedItem[property] === item[property]
+      )
+    );
+  };
+
   const makeChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSelectedItems((items: Item[]) =>
       event.target.checked
         ? [item, ...items]
-        : items.filter((value) => value !== item)
+        : items.filter((value) => !isItemSelected([value]))
     );
   };
 
   const { state, getCheckboxProps, getInputProps, getLabelProps, htmlProps } =
     useCheckbox({
       onChange: makeChange,
-      isChecked: selectedItems.includes(item),
+      isChecked: isItemSelected(selectedItems),
     });
 
   return (

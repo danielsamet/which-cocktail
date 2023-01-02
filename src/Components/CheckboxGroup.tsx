@@ -7,6 +7,7 @@ type CheckboxGroupProps<Item extends CheckboxItem<Item>> = {
   items: Item[];
   selectedItems: Item[];
   setSelectedItems: Dispatch<SetStateAction<Item[]>>;
+  checkWithProperties?: (keyof Item)[];
 };
 
 export const CheckboxGroup = <Item extends CheckboxItem<Item>>({
@@ -14,6 +15,7 @@ export const CheckboxGroup = <Item extends CheckboxItem<Item>>({
   items,
   selectedItems,
   setSelectedItems,
+  checkWithProperties,
 }: CheckboxGroupProps<Item>) => {
   return (
     <Box p={5}>
@@ -29,6 +31,7 @@ export const CheckboxGroup = <Item extends CheckboxItem<Item>>({
             key={`${item.name}-${index}`} // TODO: err, this ain't foolproof :upside-down-face:
             selectedItems={selectedItems}
             setSelectedItems={setSelectedItems}
+            checkWithProperties={checkWithProperties}
           />
         );
       })}

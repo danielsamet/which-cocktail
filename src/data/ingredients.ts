@@ -133,4 +133,7 @@ export const ingredients: Ingredient[] = [
   ...Object.values(Bitters),
   ...Object.values(Fruits),
   ...Object.values(Others),
-];
+].map((ingredient) => ({
+  ...ingredient,
+  urlSafeName: ingredient.name.replaceAll(" ", "-"),
+}));

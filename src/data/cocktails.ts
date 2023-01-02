@@ -348,4 +348,7 @@ export const cocktails: Cocktail[] = [
       Bitters.AROMATIC,
     ],
   },
-];
+].map((cocktail) => ({
+  ...cocktail,
+  urlSafeName: cocktail.name.replaceAll(" ", "-"),
+}));

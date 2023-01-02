@@ -1,7 +1,7 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { CheckboxGroup } from "./Components/CheckboxGroup";
-import { IngredientsContext } from "./App";
+import { IngredientsContext, INGREDIENT_PROPERTIES_TO_COMPARE } from "./App";
 import { Ingredient, ingredientTypes } from "./data/types";
 
 export const ListIngredients = () => {
@@ -49,6 +49,7 @@ export const ListIngredients = () => {
               items={ingredientsByType}
               selectedItems={selectedIngredients}
               setSelectedItems={setSelectedIngredients}
+              checkWithProperties={INGREDIENT_PROPERTIES_TO_COMPARE}
             />
           );
         })}
