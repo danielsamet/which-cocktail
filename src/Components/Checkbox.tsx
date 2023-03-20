@@ -14,6 +14,13 @@ type CheckboxProps<Item extends CheckboxItem<Item>> = {
   checkWithProperties?: (keyof Item)[];
 };
 
+/**
+ * Checkbox
+ * @param item
+ * @param selectedItems
+ * @param setSelectedItems
+ * @param checkWithProperties [item's properties to use when checking if it exists in selectedItems]
+ */
 export const Checkbox = <Item extends CheckboxItem<Item>>({
   item,
   selectedItems,
