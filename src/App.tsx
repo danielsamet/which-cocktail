@@ -89,12 +89,14 @@ export const App = () => {
         value={{
           ingredients: ingredients.map((ingredient) => ({
             ...ingredient,
-            callback: () =>
-              navigate(
-                `/ingredients/${ingredient.type}/${
-                  ingredient.urlSafeName || ingredient.name
-                }`
-              ),
+            callback: ingredient.description
+              ? () =>
+                  navigate(
+                    `/ingredients/${ingredient.type}/${
+                      ingredient.urlSafeName || ingredient.name
+                    }`
+                  )
+              : undefined,
           })),
           selectedIngredients: selectedIngredients,
           setSelectedIngredients: setSelectedIngredients,
