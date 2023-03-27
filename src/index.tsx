@@ -5,6 +5,7 @@ import { App } from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { TitleBlock } from "./TitleBlock";
 import { IngredientPage } from "./Pages/IngredientPage";
+import { CocktailPage } from "./Pages/CocktailPage";
 import { ErrorPage } from "./Pages/ErrorPage";
 
 const container = document.getElementById("root");
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "ingredients/:type/:name",
         element: <IngredientPage />,
+      },
+      {
+        path: "cocktails/:name",
+        element: <CocktailPage />,
       },
       {
         path: "source_one/:name",

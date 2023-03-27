@@ -13,7 +13,6 @@ import { Cocktail, Ingredient } from "./data/types";
 import { ingredients } from "./data/ingredients/all";
 import { cocktails } from "./data/cocktails/all";
 import { Page } from "./Pages/Page";
-import { useNavigate } from "react-router-dom";
 
 type IngredientValues = {
   ingredients: Ingredient[];
@@ -53,14 +52,14 @@ export const INGREDIENT_PROPERTIES_TO_COMPARE = [
   "name",
 ] as (keyof Ingredient)[];
 
+export const COCKTAIL_PROPERTIES_TO_COMPARE = ["name"] as (keyof Cocktail)[];
+
 export const App = () => {
   const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>(
     []
   );
   const [availableCocktails, setAvailableCocktails] = useState<Cocktail[]>([]);
   const [selectedCocktails, setSelectedCocktails] = useState<Cocktail[]>([]);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const areIngredientsAvailable = (cocktail: Cocktail) =>
@@ -89,14 +88,6 @@ export const App = () => {
         value={{
           ingredients: ingredients.map((ingredient) => ({
             ...ingredient,
-            callback: ingredient.description
-              ? () =>
-                  navigate(
-                    `/ingredients/${ingredient.type}/${
-                      ingredient.urlSafeName || ingredient.name
-                    }`
-                  )
-              : undefined,
           })),
           selectedIngredients: selectedIngredients,
           setSelectedIngredients: setSelectedIngredients,
@@ -104,11 +95,7 @@ export const App = () => {
       >
         <CocktailsContext.Provider
           value={{
-            cocktails: cocktails.map((cocktail) => ({
-              ...cocktail,
-              callback: () =>
-                navigate(`/cocktails/${cocktail.urlSafeName || cocktail.name}`),
-            })),
+            cocktails: cocktails,
             availableCocktails: availableCocktails,
             setAvailableCocktails: setAvailableCocktails,
             selectedCocktails: selectedCocktails,

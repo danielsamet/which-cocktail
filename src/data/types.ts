@@ -17,7 +17,7 @@ export type Ingredient<
   type: IType;
   description?: string;
   aliases?: string[];
-  callback?: (ingredient: Ingredient) => void;
+  address?: string;
   urlSafeName?: string;
 };
 
@@ -25,5 +25,6 @@ export type Cocktail = {
   name: string;
   ingredients: Ingredient[];
   description?: string;
+  address?: string;
   urlSafeName?: string;
 };

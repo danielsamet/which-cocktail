@@ -1,12 +1,15 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
 import React, { useContext } from "react";
-import { CocktailsContext } from "./App";
+import { COCKTAIL_PROPERTIES_TO_COMPARE, CocktailsContext } from "./App";
 import { CheckboxGroup } from "./Components/CheckboxGroup";
 import { Cocktail } from "./data/types";
+import { useNavigate } from "react-router-dom";
 
 export const ListCocktails = () => {
   const { availableCocktails, selectedCocktails, setSelectedCocktails } =
     useContext(CocktailsContext);
+
+  const navigate = useNavigate();
 
   const selectAll = () => {
     setSelectedCocktails(availableCocktails);
@@ -15,6 +18,13 @@ export const ListCocktails = () => {
   const deselectAll = () => {
     setSelectedCocktails([]);
   };
+
+  const cocktails = availableCocktails.map((cocktail) => ({
+    ...cocktail,
+    callback: cocktail.address
+      ? () => navigate(cocktail.address ?? "/cocktails/unknown")
+      : undefined,
+  }));
 
   return (
     <Box
@@ -40,9 +50,10 @@ export const ListCocktails = () => {
         >
           <CheckboxGroup<Cocktail>
             title={"Results"}
-            items={availableCocktails}
+            items={cocktails}
             selectedItems={selectedCocktails}
             setSelectedItems={setSelectedCocktails}
+            checkWithProperties={COCKTAIL_PROPERTIES_TO_COMPARE}
           />
         </Box>
       ) : (

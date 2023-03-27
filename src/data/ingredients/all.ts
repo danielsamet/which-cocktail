@@ -1,4 +1,3 @@
-import { Ingredient } from "../types";
 import {
   Bases,
   Bitters,
@@ -8,6 +7,7 @@ import {
   Mixers,
   Others,
 } from "./ingredients";
+import { Ingredient } from "../types";
 
 export const ingredients: Ingredient[] = [
   ...Object.values(Bases),
@@ -17,7 +17,12 @@ export const ingredients: Ingredient[] = [
   ...Object.values(Bitters),
   ...Object.values(Fruits),
   ...Object.values(Others),
-].map((ingredient) => ({
-  ...ingredient,
-  urlSafeName: ingredient.name.replaceAll(" ", "-"),
-}));
+]
+  .map((ingredient) => ({
+    ...ingredient,
+    urlSafeName: ingredient.name.replaceAll(" ", "-"),
+  }))
+  .map((ingredient) => ({
+    ...ingredient,
+    address: `/ingredients/${ingredient.type}/${ingredient.urlSafeName}`,
+  }));

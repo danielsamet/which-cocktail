@@ -3,10 +3,13 @@ import React, { useContext } from "react";
 import { CheckboxGroup } from "./Components/CheckboxGroup";
 import { IngredientsContext, INGREDIENT_PROPERTIES_TO_COMPARE } from "./App";
 import { Ingredient, ingredientTypes } from "./data/types";
+import { useNavigate } from "react-router-dom";
 
 export const ListIngredients = () => {
   const { ingredients, selectedIngredients, setSelectedIngredients } =
     useContext(IngredientsContext);
+
+  const navigate = useNavigate();
 
   const selectAll = () => {
     setSelectedIngredients(ingredients);
@@ -39,9 +42,14 @@ export const ListIngredients = () => {
         mt={5}
       >
         {ingredientTypes.map((type) => {
-          const ingredientsByType = ingredients.filter(
-            (ingredient) => ingredient.type === type
-          );
+          const ingredientsByType = ingredients
+            .filter((ingredient) => ingredient.type === type)
+            .map((ingredient) => ({
+              ...ingredient,
+              callback: ingredient.address
+                ? () => navigate(ingredient.address ?? "/ingredients/unknown")
+                : undefined,
+            }));
           return (
             <CheckboxGroup<Ingredient>
               key={type}
