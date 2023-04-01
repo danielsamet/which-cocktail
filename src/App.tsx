@@ -63,10 +63,11 @@ export const App = () => {
 
   useEffect(() => {
     const areIngredientsAvailable = (cocktail: Cocktail) =>
-      cocktail.ingredients.every((ingredient) =>
+      cocktail.components.every((ingredient) =>
         selectedIngredients.some((selectedIngredient) =>
           INGREDIENT_PROPERTIES_TO_COMPARE.every(
-            (property) => selectedIngredient[property] === ingredient[property]
+            (property) =>
+              selectedIngredient[property] === ingredient.ingredient[property]
           )
         )
       );

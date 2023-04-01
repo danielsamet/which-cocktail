@@ -23,7 +23,11 @@ export type Ingredient<
 
 export type Cocktail = {
   name: string;
-  ingredients: Ingredient[];
+  components: {
+    qty?: number;
+    measure?: "measure" | "ml" | "tsp" | "tbsp";
+    ingredient: Ingredient;
+  }[];
   description?: string;
   address?: string;
   urlSafeName?: string;
