@@ -24,6 +24,7 @@ export const ListCocktails = () => {
     callback: cocktail.address
       ? () => navigate(cocktail.address ?? "/cocktails/unknown")
       : undefined,
+    details: cocktail.ingredients.map((ingredient) => ingredient.name),
   }));
 
   return (

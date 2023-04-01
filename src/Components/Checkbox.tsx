@@ -1,8 +1,18 @@
-import { Box, Button, chakra, Flex, Text, useCheckbox } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  chakra,
+  Flex,
+  HStack,
+  Text,
+  useCheckbox,
+  VStack,
+} from "@chakra-ui/react";
 import { ChangeEvent } from "react";
 
 export type CheckboxItem<Item> = {
   name: string;
+  details?: string[];
   callback?: (item: Item) => void;
   callbackButtonIcon?: string;
 };
@@ -53,48 +63,72 @@ export const Checkbox = <Item extends CheckboxItem<Item>>({
 
   return (
     <chakra.label
+      w={"100%"}
       display="flex"
-      flexDirection="row"
       alignItems="center"
-      gridColumnGap={2}
-      my={1}
-      bg="transparent"
-      _hover={{ background: "blackAlpha.400" }}
-      borderRadius={2}
-      px={3}
-      py={1}
       cursor="pointer"
+      gridColumnGap={2}
+      bg="transparent"
+      borderRadius={3}
+      my={1}
+      px={3}
+      py={item.details ? 2 : 1}
+      _hover={{ background: "blackAlpha.400" }}
       {...htmlProps}
     >
       <input {...getInputProps()} hidden />
-      <Flex
-        alignItems="center"
-        justifyContent="center"
-        border="2px solid"
-        borderColor="green.600"
-        w={4}
-        h={4}
-        {...getCheckboxProps()}
-      >
-        {state.isChecked && <Box w={2} h={2} bg="green.500" />}
-      </Flex>
-      <Text
-        color="gray.100"
-        fontWeight={"semibold"}
-        textTransform={"capitalize"}
-        {...getLabelProps()}
-      >
-        {item.name}
-      </Text>
-      {item.callback && (
-        <Button
-          size={"xs"}
-          marginStart={"auto"}
-          onClick={() => item.callback && item.callback(item)}
-        >
-          {item.callbackButtonIcon || "?"}
-        </Button>
-      )}
+      <VStack alignItems={"start"} width={"100%"}>
+        <HStack width={"100%"} justifyContent={"space-between"}>
+          <Box>
+            <Flex
+              alignItems="center"
+              justifyContent={"center"}
+              border="2px solid"
+              borderColor="green.600"
+              w={"4"}
+              h={"4"}
+              {...getCheckboxProps()}
+            >
+              {state.isChecked && (
+                <Box w={2} h={2} mx={"auto"} bg="green.500" />
+              )}
+            </Flex>
+          </Box>
+          <Text
+            color="gray.100"
+            fontWeight={"semibold"}
+            textTransform={"capitalize"}
+            width={"90%"}
+            {...getLabelProps()}
+          >
+            {item.name}
+          </Text>
+          {item.callback && (
+            <Button
+              size={"xs"}
+              marginStart={"auto"}
+              onClick={() => item.callback && item.callback(item)}
+            >
+              {item.callbackButtonIcon || "?"}
+            </Button>
+          )}
+        </HStack>
+        {item.details && (
+          <Text
+            marginTop={"0.1em !important"}
+            paddingStart={"1.8em"}
+            width={"90%"}
+            overflow={"hidden"}
+            textOverflow={"ellipsis"}
+            whiteSpace={"nowrap"}
+            textTransform={"capitalize"}
+            color={"whiteAlpha.600"}
+            fontSize={"sm"}
+          >
+            {item.details.join(" / ")}
+          </Text>
+        )}
+      </VStack>
     </chakra.label>
   );
 };
