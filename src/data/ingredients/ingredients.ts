@@ -101,7 +101,6 @@ export const Fruits: IngredientMap<"fruit"> = {
 
 export const Others: IngredientMap<"other"> = {
   SUGAR: { name: "sugar", type: "other" },
-  SUGAR_CUBE: { name: "sugar cube", type: "other" },
   BROWN_SUGAR: { name: "brown sugar", type: "other" },
   SIMPLE_SYRUP: { name: "simple syrup", type: "other" },
   CARDAMOM_SYRUP: { name: "cardamom syrup", type: "other" },
@@ -123,4 +122,10 @@ export const Others: IngredientMap<"other"> = {
   DIJON_MUSTARD: { name: "dijon mustard", type: "other" },
   CREAMED_HORSERADISH: { name: "creamed horseradish", type: "other" },
   WASABI: { name: "wasabi", type: "other" },
+  OLIVE: { name: "olive", type: "other" },
+  MARASCHINO_CHERRY: { name: "maraschino cherry", type: "other" },
+  ORANGE_PEEL: { name: "orange peel", type: "other" },
+  LEMON_PEEL: { name: "lemon peel", type: "other" },
+  LEMON_SLICE: { name: "lemon slice", type: "other" },
+  LIME_SLICE: { name: "lime slice", type: "other" },
 } as const;
