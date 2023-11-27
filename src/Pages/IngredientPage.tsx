@@ -23,7 +23,10 @@ export const IngredientPage = () => {
     <Box>
       <Heading textTransform={"capitalize"}>{ingredient.name}</Heading>
       <Divider mb={5} />
-      <Text>{ingredient.description}</Text>
+      <Text>
+        {ingredient.description ??
+          "We don't currently have any information on this ingredient. Check back in a little while and hopefully we'll have dug something up!"}
+      </Text>
     </Box>
   );
 };

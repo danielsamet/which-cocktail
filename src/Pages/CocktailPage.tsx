@@ -19,7 +19,10 @@ export const CocktailPage = () => {
     <Box>
       <Heading textTransform={"capitalize"}>{cocktail.name}</Heading>
       <Divider mb={5} />
-      <Text>{cocktail.description}</Text>
+      <Text>
+        {cocktail.description ??
+          "We don't currently have any information on this cocktail. Check back in a little while and hopefully we'll have dug something up!"}
+      </Text>
     </Box>
   );
 };
