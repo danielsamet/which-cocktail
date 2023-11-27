@@ -1,6 +1,7 @@
 import { Box, Button, HStack, VStack } from "@chakra-ui/react";
 import { Outlet, useMatch, useNavigate } from "react-router-dom";
 import * as React from "react";
+import { ColorModeSwitcher } from "../ColorModeSwitcher";
 
 export const Page = () => {
   const titleMatch = useMatch("/");
@@ -13,13 +14,16 @@ export const Page = () => {
       </Box>
 
       <HStack w={"100%"} justifyContent={"space-between"}>
-        <Button
-          size={"lg"}
-          disabled={Boolean(titleMatch)}
-          onClick={() => navigate("/")}
-        >
-          Which-Cocktail
-        </Button>
+        <HStack>
+          <Button
+            size={"lg"}
+            disabled={Boolean(titleMatch)}
+            onClick={() => navigate("/")}
+          >
+            Which-Cocktail
+          </Button>
+          <ColorModeSwitcher />
+        </HStack>
         <Button size={"lg"} disabled>
           Build Menu
         </Button>
